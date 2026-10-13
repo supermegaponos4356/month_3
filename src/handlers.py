@@ -50,7 +50,7 @@ async def quiz_start(callback: CallbackQuery, state: FSMContext):
 
 
 @router.callback_query(F.data == "quiz_restart")
-async def quiz_start(callback: CallbackQuery, state: FSMContext):
+async def quiz_restart(callback: CallbackQuery, state: FSMContext):
     await callback.answer("Начинаем игру заново!", show_alert=True)
     await state.update_data(index=0, score=0)       
     await state.set_state(Quiz.waiting_answer)      
