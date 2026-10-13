@@ -76,7 +76,7 @@ async def habdle_answer(message: Message, state: FSMContext):
     index += 1
     if index >= len(QUESTIONS):
         await message.answer (f"Конец! Счет: {score}/{len(QUESTIONS)} сыграть снова?",
-                             reply_markup=inline_keyboard
+                             reply_markup=quiz_restart
                               )
 
         await state.clear()
