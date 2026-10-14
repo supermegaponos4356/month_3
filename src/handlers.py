@@ -49,23 +49,21 @@ async def quiz_start(callback: CallbackQuery, state: FSMContext):
 
 
 
-@router.callback_query(F.data == "quiz_restart")
-async def quiz_restart(callback: CallbackQuery, state: FSMContext):
-    await callback.answer("Начинаем игру заново!", show_alert=True)
-    await state.update_data(index=0, score=0)       
-    await state.set_state(Quiz.waiting_answer)      
-    await callback.message.answer(f'Вопрос 1: {QUESTIONS[0]['q']}')
 
 
 
 
 
 
+# Принимаем ответ - хендлер сработает ТОЛЬКО в состоянии waiting_answer
 @router.message(Quiz.waiting_answer)
 async def habdle_answer(message: Message, state: FSMContext):
     data = await state.get_data()
     index = data["index"]
     score = data["score"]
+ 
+
+
 
     if message.text.lower() == QUESTIONS[index]['a']:
         score += 1
@@ -76,7 +74,7 @@ async def habdle_answer(message: Message, state: FSMContext):
     index += 1
     if index >= len(QUESTIONS):
         await message.answer (f"Конец! Счет: {score}/{len(QUESTIONS)} сыграть снова?",
-                             reply_markup=quiz_restart
+                             reply_markup=inline_keyboard
                               )
 
         await state.clear()

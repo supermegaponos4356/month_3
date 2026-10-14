@@ -12,16 +12,8 @@ reply_keyboard = ReplyKeyboardMarkup(keyboard=[
 
 inline_keyboard = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Наш сайт", url="https://geeks.kg")],
-    [InlineKeyboardButton(text="Начать игру", callback_data="quiz_start")],
+    [InlineKeyboardButton(text="Начать игру", callback_data="quiz_start")]
 ])
-
-
-
-
-restart_keyboard = InlineKeyboardMarkup(inline_keyboard=[
-     [InlineKeyboardButton(text="Начать игру заново", callback_data="quiz_restart")]
-])
-
 
 
 
